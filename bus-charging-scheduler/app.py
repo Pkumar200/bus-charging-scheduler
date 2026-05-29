@@ -1,3 +1,5 @@
+import os
+
 import streamlit as st
 import pandas as pd
 from scheduler.loader import load_all_scenarios
@@ -7,7 +9,8 @@ st.set_page_config(page_title="Bus Charging Scheduler", layout="wide")
 st.title("🚌 Bus Charging Scheduler")
 
 # ── Load all scenarios ──────────────────────────────────────────────
-scenarios = load_all_scenarios("scenarios")
+SCENARIOS_DIR = os.path.join(os.path.dirname(__file__), "scenarios")
+scenarios = load_all_scenarios(SCENARIOS_DIR)
 scenario_map = {s.name: s for s in scenarios}
 
 selected_name = st.selectbox(
